@@ -1,0 +1,9 @@
+.DS_Store
+.idea/
+.vscode/
+coverage.out
+dist/
+node_modules/
+.env
+.env.*
+!.env.example
