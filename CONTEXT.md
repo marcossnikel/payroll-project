@@ -29,5 +29,16 @@ One query to an external provider to resolve an ambiguous payment attempt.
 _Avoid_: Payment attempt
 
 **Needs Review**:
-A non-terminal operational condition in which automation cannot safely determine the next action.
+A terminal state for automation in which the system cannot safely determine the next action and must preserve the full history for an operator.
 _Avoid_: Failed, unknown
+
+## Decisions
+
+- A payment obligation is immutable after payroll approval.
+- Retrying creates a new payment attempt for the same worker payment; it does not replace or mutate the obligation.
+- Provider server errors retry automatically with a bounded attempt budget.
+- Invalid destination data fails without retry because repetition cannot repair the input.
+- A timeout moves the payment to unknown and reconciliation must run before another send.
+- A provider-confirmed not-found result permits a new automatic payment attempt.
+- Compliance holds pause automation until an operator releases the hold.
+- A payroll run is completed when every payment is terminal, even when its summary carries warnings.

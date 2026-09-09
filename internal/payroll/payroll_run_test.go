@@ -94,7 +94,9 @@ func TestReplayingTheSameApprovalReturnsTheExistingResult(t *testing.T) {
 	if err != nil {
 		t.Fatalf("first approval: %v", err)
 	}
-	second, err := run.Approve(approval)
+	replay := approval
+	replay.ApprovedAt = replay.ApprovedAt.Add(time.Minute)
+	second, err := run.Approve(replay)
 	if err != nil {
 		t.Fatalf("replay approval: %v", err)
 	}
