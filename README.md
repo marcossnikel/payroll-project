@@ -12,4 +12,10 @@ The system receives an already-calculated payroll run, approves it once, process
 
 ## Current slice
 
-The first slice is the Go domain: approving a draft payroll run creates one pending worker payment for each payment obligation.
+The Go domain currently supports:
+
+- Creating structurally valid payroll runs from synthetic payment obligations.
+- Approving a draft payroll run once.
+- Creating one pending worker payment per obligation.
+- Returning the existing result for an identical approval replay.
+- Rejecting conflicting idempotency keys and invalid approval audit data.
